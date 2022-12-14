@@ -5,8 +5,8 @@ import frappe
 from frappe.model.document import Document
 
 class Property(Document):
-	
-	def validate(self):
+	pass
+	# def validate(self):
 		# if self.property_type == "Flat":
 		# 	for amenity in self.amenities:
 		# 		print("The amenity is")

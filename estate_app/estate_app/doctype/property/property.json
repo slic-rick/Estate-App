@@ -13,6 +13,7 @@
   "address",
   "column_break_3",
   "image",
+  "agent_name",
   "status",
   "agent",
   "section_break",
@@ -84,11 +85,19 @@
    "fieldtype": "Table",
    "label": "Amenities",
    "options": "Property Amenity Detail"
+  },
+  {
+   "depends_on": "agent",
+   "fetch_from": "agent.agent_name",
+   "fieldname": "agent_name",
+   "fieldtype": "Data",
+   "label": "Agent Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-14 10:51:44.254577",
+ "modified": "2022-12-14 13:01:14.435436",
  "modified_by": "Administrator",
  "module": "Estate App",
  "name": "Property",
