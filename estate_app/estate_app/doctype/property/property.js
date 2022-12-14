@@ -10,6 +10,24 @@ frappe.ui.form.on('Property', {
 				args:{property_type: type},
 				callback: (r) => {
 					console.log(r);
+
+					if(r.message.length > 0){
+
+						var header = "<h3> Properties from DB API </h3>";
+						var body = ``;
+
+						r.message.forEach( item => {
+						
+                         var count = `<p> Name: ${item.property_type} <a href= "/${item.name}"> open link </a>`; 
+							body = body + count;
+						});
+
+						var all = header + body;
+						frappe.msgprint(__(all));
+						
+
+					}
+					// console.log(r);
 				}
 			})
 
