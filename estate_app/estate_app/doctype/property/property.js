@@ -3,8 +3,17 @@
 
 frappe.ui.form.on('Property', {
 	refresh: function(frm) {
-		frm.add_custom_button("Get All",() => {
-			frappe.msgprint("Get all");
+		frm.add_custom_button("Get Prop Type",() => {
+			var type = frm.doc.property_type;
+			frappe.call({
+				method: 'estate_app.estate_app.doctype.property.api.get_property_type',
+				args:{property_type: type},
+				callback: (r) => {
+					console.log(r);
+				}
+			})
+
+
 		},"Action")
 		frm.add_custom_button("Get One",() => {
 
@@ -51,6 +60,8 @@ frappe.ui.form.on('Property', {
 			
 		}
 	}
+
+
 });
 
 // For listening to a table in a doctype
