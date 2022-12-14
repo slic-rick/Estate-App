@@ -8,7 +8,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "amenity_name"
+  "amenity_name",
+  "amenity_amount"
  ],
  "fields": [
   {
@@ -16,11 +17,16 @@
    "fieldtype": "Data",
    "label": "Amenity Name",
    "unique": 1
+  },
+  {
+   "fieldname": "amenity_amount",
+   "fieldtype": "Currency",
+   "label": "Amenity amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-14 10:59:12.594897",
+ "modified": "2022-12-14 22:22:34.485106",
  "modified_by": "Administrator",
  "module": "Estate App",
  "name": "Property Amenity Item",

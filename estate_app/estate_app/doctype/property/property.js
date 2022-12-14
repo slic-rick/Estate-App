@@ -3,6 +3,7 @@
 
 frappe.ui.form.on('Property', {
 	refresh: function(frm) {
+
 		frm.add_custom_button("Get Prop Type",() => {
 			var type = frm.doc.property_type;
 			frappe.call({
@@ -77,6 +78,58 @@ frappe.ui.form.on('Property', {
 			}
 			
 		}
+
+		frm.calculate_total = (frm) => {
+
+
+			
+
+				var total = 0;
+				frm.doc.amenities.forEach(item => {
+					
+					total = total + item.amenity_amount; 
+					
+				});
+
+				console.log(`The final total from the loop: ${total}`);
+
+				var finalAmount = frm.doc.property_price + total;
+				if(frm.doc.discount){
+
+					finalAmount = finalAmount - (finalAmount  * (frm.doc.discount / 100))
+				}
+
+				
+
+				console.log(`FINAL COMPUTED PRICE ${finalAmount}`);
+
+				frm.set_value("total_price",finalAmount)
+				frm.refresh_field("total_price")
+			
+			
+		},
+
+		frm.copy_amenities = (frm) => {
+			console.log("IN copy amenities");
+			frm.doc.amenities.forEach(item => {
+				console.log(item);
+				item.discount = frm.doc.discount
+			});
+
+			frm.refresh_field('amenities');
+		}
+	},
+
+
+	property_price: (frm) => {
+		frm.calculate_total(frm)
+		
+	},
+
+	discount: (frm) => {
+		frm.copy_amenities(frm)
+		frm.calculate_total(frm);
+		
 	}
 
 
@@ -92,5 +145,11 @@ frappe.ui.form.on("Property Amenity Detail", {
 		// Pasing the changed table row to the function that is accessed in another doctype
 		frm.check_duplicate_amenity(frm,row);
 		frm.check_outdoor_garage(row);
+		frm.calculate_total(frm)
+	},
+	
+	// Called when we delete a row
+	amenities_remove:  (frm,cdt,cdn) => {
+		frm.calculate_total(frm);
 	}
 });

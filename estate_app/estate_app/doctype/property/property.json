@@ -11,15 +11,19 @@
   "property_name",
   "property_type",
   "address",
+  "property_price",
   "column_break_3",
   "image",
   "agent_name",
   "status",
   "agent",
+  "discount",
   "section_break",
   "description",
   "section_break6",
-  "amenities"
+  "amenities",
+  "pricing_section",
+  "total_price"
  ],
  "fields": [
   {
@@ -93,11 +97,33 @@
    "fieldtype": "Data",
    "label": "Agent Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "property_price",
+   "fieldtype": "Currency",
+   "label": "Property Price",
+   "reqd": 1
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Percent",
+   "label": "Discount"
+  },
+  {
+   "fieldname": "pricing_section",
+   "fieldtype": "Section Break",
+   "label": "pricing"
+  },
+  {
+   "fieldname": "total_price",
+   "fieldtype": "Currency",
+   "label": "Total Price",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-14 13:01:14.435436",
+ "modified": "2022-12-14 22:28:54.991648",
  "modified_by": "Administrator",
  "module": "Estate App",
  "name": "Property",
