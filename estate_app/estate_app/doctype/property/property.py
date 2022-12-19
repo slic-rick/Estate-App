@@ -6,7 +6,12 @@ from frappe.model.document import Document
 
 class Property(Document):
 	pass
-	# def validate(self):
+	def validate(self):
+		try:
+			frappe.db.get(""" SELECT * FROM home;""")
+		except Exception as e:
+			error =  frappe.log_error(frappe.get_traceback(),f"{e}")
+			frappe.msgprint("AN error had occured {error.name}")
 		# if self.property_type == "Flat":
 		# 	for amenity in self.amenities:
 		# 		print("The amenity is")

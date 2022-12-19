@@ -2,6 +2,12 @@ import frappe
 from estate_app.utils import sendmail
 
 def validate(doc,event):
+    # 
+    # try:
+    #     frappe.db.get(""" SELECT * FROM home;""")
+    # except Exception as e:
+    #     error =  frappe.log_error(frappe.get_traceback(),f"{e}")
+    #     frappe.msgprint("AN error had occured {error.name}")
     frappe.msgprint("The validate hook is working ")
 
 def on_update(doc,event):

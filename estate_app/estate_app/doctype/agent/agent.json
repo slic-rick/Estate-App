@@ -10,7 +10,8 @@
  "field_order": [
   "agent_name",
   "email",
-  "phone"
+  "phone",
+  "image"
  ],
  "fields": [
   {
@@ -31,11 +32,16 @@
    "fieldtype": "Data",
    "label": "Phone",
    "options": "Phone"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-13 17:18:25.680598",
+ "modified": "2022-12-18 13:55:12.366064",
  "modified_by": "Administrator",
  "module": "Estate App",
  "name": "Agent",

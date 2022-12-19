@@ -36,7 +36,7 @@ def get_data(filters):
 	print("---------------------------------------")
 	print(f"\n\n\n\n {query} \n\n\n\n")
 	data = frappe.db.sql(f"""{query}""")
-
+ 
 
 
 	return data
