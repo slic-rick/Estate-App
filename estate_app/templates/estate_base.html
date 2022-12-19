@@ -18,14 +18,33 @@
     <link rel="stylesheet" href="/assets/estate_app/homeland/css/animate.css">
     <link rel="stylesheet" href="/assets/estate_app/homeland/fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="/assets/estate_app/homeland/css/fl-bigmug-line.css">
-    
-  
-    <link rel="stylesheet" href="/assets/estate_app/homeland/css/aos.css">
 
+    <!-- FRAPPE RESOURCES -->
+
+    <script>
+
+		window.frappe = {};
+		frappe.ready_events = [];
+		frappe.ready = function(fn) {
+			frappe.ready_events.push(fn);
+		}
+		window.dev_server = {{ dev_server }};
+		window.socketio_port = {{ (frappe.socketio_port or 'null') }};
+
+	</script>
+    
+    <link rel="shortcut icon"href="/assets/erpnext/images/erpnext-favicon.svg" type="image/x-icon">
+	<link rel="icon" href="/assets/erpnext/images/erpnext-favicon.svg" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="/assets/frappe/dist/css/desk.bundle.TQXJRYXZ.css">
+    <link type="text/css" rel="stylesheet" href="/assets/frappe/dist/css/report.bundle.2EDIUCOQ.css">
+    <link type="text/css" rel="stylesheet" href="/assets/erpnext/dist/css/erpnext.bundle.DDB6AGK4.css">
+
+    <link rel="stylesheet" href="/assets/estate_app/homeland/css/aos.css">
     <link rel="stylesheet" href="/assets/estate_app/homeland/css/style.css">
     
   </head>
-  <body>
+  <body frappe-session-status="{{ 'logged-in' if frappe.session.user != 'Guest' else 'logged-out'}}" data-path="{{ path | e }}" {%- if template and template.endswith('.md') %} frappe-content-type="markdown" {%- endif %} class="{{ body_class or ''}}" >
+
   
   <div class="site-loader"></div>
   
@@ -171,6 +190,43 @@
     <script src="/assets/estate_app/homeland/js/aos.js"></script>
   
     <script src="/assets/estate_app/homeland/js/main.js"></script>
+
+
       
+    <!-- FRAPPE RESOURCES -->
+
+    <script type="text/javascript">
+			window._version_number = "p3Dl7Wfb";
+			// browser support
+			window.app = true;
+			window.dev_server = 1;
+
+			if (!window.frappe) window.frappe = {};
+		    frappe.boot = {{ boot }}
+		    // for backward compatibility of some libs
+		    frappe.sys_defaults = frappe.boot.sysdefaults;
+			frappe._messages = frappe.boot["__messages"];
+			frappe.csrf_token = "{{ frappe.session.csrf_token }}";
+		</script>
+
+	<script type="text/javascript" src="/assets/frappe/dist/js/libs.bundle.ZFPPLQGN.js"></script>
+	
+	<script type="text/javascript" src="/assets/frappe/dist/js/desk.bundle.MCES5AM6.js"></script>
+	
+	<script type="text/javascript" src="/assets/frappe/dist/js/list.bundle.7D2DSEXA.js"></script>
+	
+	<script type="text/javascript" src="/assets/frappe/dist/js/form.bundle.JLCLG2EA.js"></script>
+	
+	<script type="text/javascript" src="/assets/frappe/dist/js/controls.bundle.V3XQQDCU.js"></script>
+	
+	<script type="text/javascript" src="/assets/frappe/dist/js/report.bundle.QLDIDYNL.js"></script>
+	
+	<script type="text/javascript" src="/assets/erpnext/dist/js/erpnext.bundle.57A6GVVC.js"></script>
+	
+	<script type="text/javascript" src="/assets/hrms/dist/js/hrms.bundle.UG77BJFR.js"></script>
+
+    <script> frappe.csrf_token = "{{frappe.session.csrf_token}}"; </script>
+    <!-- FRAPPE RESOURCES -->
+
     </body>
   </html>
