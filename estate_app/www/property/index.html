@@ -44,15 +44,15 @@
               <label for="list-types">Listing Types</label>
               <div class="select-wrap">
                 <span class="icon icon-arrow_drop_down"></span>
-                <select name="list-types" id="list-types" class="form-control d-block rounded-0">
-                  <option value="">Condo</option>
-                  <option value="">Commercial Building</option>
-                  <option value="">Land Property</option>
+                <select name="types" id="types" class="form-control d-block rounded-0">
+                  {% for type in types %}
+                  <option value="{{type.get('name')}}">{{type.get('name')}}</option>
+                  {% endfor%}
                 </select>
               </div>
             </div>
             <div class="col-md-3">
-              <label for="offer-types">Offer Type</label>
+              <label for="status">Offer Type</label>
               <div class="select-wrap">
                 <span class="icon icon-arrow_drop_down"></span>
                 <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
@@ -162,8 +162,30 @@
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="site-pagination">
-            <a href="/?page={{next_page}} " class="active">Next</a>
-            <a href="/?page={{prev}} ">Prev</a>
+            {% if search %}
+
+              {%if prev %}
+              <a href="/?page={{prev}}&type={{type}} " class="active">Prev</a>
+              {%endif%}
+
+              {%if next_page %}
+              <a href="/?page={{next_page}}&type={{type}}" class="active">Next</a>
+              {%endif%}
+             <!-- <a href="/?page={{next_page}} " class="active">Next</a> -->
+            {% else %}
+
+            {%if prev %}
+            <a href="/?page={{prev}} " class="active">Prev</a>
+            {%endif%}
+
+            {%if next_page %}
+            <a href="/?page={{next_page}}" class="active">Next</a>
+            {%endif%}
+            
+            {% endif %}
+
+            <!-- <a href="/?page={{next_page}} " class="active">Next</a>
+            <a href="/?page={{prev}} ">Prev</a> -->
           </div>
         </div>  
       </div>

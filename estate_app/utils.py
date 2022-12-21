@@ -13,9 +13,10 @@ def sendmail(doc,recipients,msg,title,attachments=None):
 
     frappe.enqueue(method=frappe.sendmail,queue='short',timeout=300,**email_args)
 
-def paginate(doctype,page=0,paginate_by=6, conditions = " "):
+def paginate(doctype,page=0,paginate_by=6, conditions = ""):
     
     query = f""" SELECT * FROM `tab{doctype}` {conditions}  ORDER BY creation DESC """
+    search = False
     
 
 
@@ -36,10 +37,15 @@ def paginate(doctype,page=0,paginate_by=6, conditions = " "):
         else:
             pass
 
-        properties = frappe.db.sql(query + f""" LIMIT {paginate_by} ;""",as_dict = True)
+        properties = frappe.db.sql(query + f""" LIMIT {paginate_by};""",as_dict = True)
+
+    
+    if(conditions):
+        search = True
 
     return {
         "properties": properties,
         "next_page":  next_page,
-        "prev":prev
+        "prev":prev,
+        "search":search
     }
