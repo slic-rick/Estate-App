@@ -47,6 +47,12 @@ doctype_js = {
 #	"Role": "home_page"
 # }
 
+website_route_rules = [
+    {"from_route":"/property/detail/<docname>",
+    "to_route":"property/detail"
+    }
+]
+
 # Generators
 # ----------
 
