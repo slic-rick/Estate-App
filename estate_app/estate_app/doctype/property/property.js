@@ -2,122 +2,177 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Property', {
-	// refresh: function(frm) {
+	refresh: function(frm) {
 
-	// 	frm.add_custom_button("Get Prop Type",() => {
-	// 		var type = frm.doc.property_type;
-	// 		frappe.call({
-	// 			method: 'estate_app.estate_app.doctype.property.api.get_property_type',
-	// 			args:{property_type: type},
-	// 			callback: (r) => {
-	// 				console.log(r);
+		frm.add_custom_button(__('Fill anemities'),function(){
+			frm.get_amenities();
+		})
 
-	// 				if(r.message.length > 0){
+		// frm.add_custom_button("Get Prop Type",() => {
+		// 	var type = frm.doc.property_type;
+		// 	frappe.call({
+		// 		method: 'estate_app.estate_app.doctype.property.api.get_property_type',
+		// 		args:{property_type: type},
+		// 		callback: (r) => {
+		// 			console.log(r);
 
-	// 					var header = "<h3> Properties from DB API </h3>";
-	// 					var body = ``;
+		// 			if(r.message.length > 0){
 
-	// 					r.message.forEach( item => {
+		// 				var header = "<h3> Properties from DB API </h3>";
+		// 				var body = ``;
+
+		// 				r.message.forEach( item => {
 						
-    //                      var count = `<p> Name: ${item.property_type} <a href= "/${item.name}"> open link </a>`; 
-	// 						body = body + count;
-	// 					});
+        //                  var count = `<p> Name: ${item.property_type} <a href= "/${item.name}"> open link </a>`; 
+		// 					body = body + count;
+		// 				});
 
-	// 					var all = header + body;
-	// 					frappe.msgprint(__(all));
+		// 				var all = header + body;
+		// 				frappe.msgprint(__(all));
 						
 
-	// 				}
-	// 				// console.log(r);
-	// 			}
-	// 		})
+		// 			}
+		// 			// console.log(r);
+		// 		}
+		// 	})
 
 
-	// 	},"Action")
-	// 	frm.add_custom_button("Get One",() => {
+		// },"Action")
+		// frm.add_custom_button("Get One",() => {
 
-	// 		frappe.msgprint("Get One");
-	// 	},"Action")
-	// },
+		// 	frappe.msgprint("Get One");
+		// },"Action")
+	},
 
 	setup: (frm) => {
 
 		// How to attach custom functions to the frm obj
-		frm.check_duplicate_amenity = (frm,row) => {
-			console.log("THE RECEOVED ROW IS --------------------");
+		// frm.check_duplicate_amenity = (frm,row) => {
+		// 	console.log("THE RECEOVED ROW IS --------------------");
 
-			frm.doc.amenities.forEach(item => {
+		// 	frm.doc.amenities.forEach(item => {
 
 
-				if(item.amenity == '' || row.idx == item.idx){
+		// 		if(item.amenity == '' || row.idx == item.idx){
 
-					// if the row is empty or row is already in the table? pass
-				}else{
+		// 			// if the row is empty or row is already in the table? pass
+		// 		}else{
 
-					if(item.amenity == row.amenity){
-						row.amenity = '';
-						frm.refresh_field("amenities")
-						frappe.throw(`The ${item.amenity} is already defined at row ${item.idx} `)
+		// 			if(item.amenity == row.amenity){
+		// 				row.amenity = '';
+		// 				frm.refresh_field("amenities")
+		// 				frappe.throw(`The ${item.amenity} is already defined at row ${item.idx} `)
 						
-					}
-				}
-			});
+		// 			}
+		// 		}
+		// 	});
 
-			console.log(row);
-		}
+		// 	console.log(row);
+		// }
 
-		frm.check_outdoor_garage = (row) => {
+		// frm.check_outdoor_garage = (row) => {
 
-			if(frm.doc.property_type == 'Flat'){
-				if(row.amenity == "Outdoor Garage"){
-					row.amenity = '';
-					frm.refresh_field("amenities")
-					frappe.throw("A Flat can not have an Outdoor garage! ")
+		// 	if(frm.doc.property_type == 'Flat'){
+		// 		if(row.amenity == "Outdoor Garage"){
+		// 			row.amenity = '';
+		// 			frm.refresh_field("amenities")
+		// 			frappe.throw("A Flat can not have an Outdoor garage! ")
 
-				}
-			}
+		// 		}
+		// 	}
 			
-		}
+		// }
 
-		frm.calculate_total = (frm) => {
+		// frm.calculate_total = (frm) => {
 
 
 			
 
-				var total = 0;
-				frm.doc.amenities.forEach(item => {
+		// 		var total = 0;
+		// 		frm.doc.amenities.forEach(item => {
 					
-					total = total + item.amenity_amount; 
+		// 			total = total + item.amenity_amount; 
 					
-				});
+		// 		});
 
-				console.log(`The final total from the loop: ${total}`);
+		// 		console.log(`The final total from the loop: ${total}`);
 
-				var finalAmount = frm.doc.property_price + total;
-				if(frm.doc.discount){
+		// 		var finalAmount = frm.doc.property_price + total;
+		// 		if(frm.doc.discount){
 
-					finalAmount = finalAmount - (finalAmount  * (frm.doc.discount / 100))
-				}
+		// 			finalAmount = finalAmount - (finalAmount  * (frm.doc.discount / 100))
+		// 		}
 
 				
 
-				console.log(`FINAL COMPUTED PRICE ${finalAmount}`);
+		// 		console.log(`FINAL COMPUTED PRICE ${finalAmount}`);
 
-				frm.set_value("total_price",finalAmount)
-				frm.refresh_field("total_price")
+		// 		frm.set_value("total_price",finalAmount)
+		// 		frm.refresh_field("total_price")
 			
 			
-		},
+		// },
 
-		frm.copy_amenities = (frm) => {
-			console.log("IN copy amenities");
-			frm.doc.amenities.forEach(item => {
-				console.log(item);
-				item.discount = frm.doc.discount
+		// frm.copy_amenities = (frm) => {
+		// 	console.log("IN copy amenities");
+		// 	frm.doc.amenities.forEach(item => {
+		// 		console.log(item);
+		// 		item.discount = frm.doc.discount
+		// 	});
+
+		// 	frm.refresh_field('amenities');
+		// }
+
+		frm.get_amenities = () => {
+			let d = new frappe.ui.Dialog({
+				title: 'Enter details',
+				fields: [
+					{
+						label: 'Select Property',
+						fieldname: 'property',
+						fieldtype: 'Link',
+						options:"Property"
+					},
+				],
+				primary_action_label: 'Submit',
+				primary_action(values) {
+	
+					if(values){
+						frappe.call({
+							method:"estate_app.estate_app.api.get_amenities",
+							args:{property:values.property},
+							callback:(r)=>{
+								console.log(r.message);
+								if(r.message){
+									r.message.forEach(item => {
+										frm.add_child('amenities',{
+											amenity:item.amenity,
+											amenity_amount:item.amenity_amount,
+											discount:item.discount
+										})
+									});
+	
+								frm.refresh_field('amenities')	
+								}
+								
+							}
+						})
+					}
+					console.log(values);
+					d.hide();
+				}
 			});
 
-			frm.refresh_field('amenities');
+			d.show();
 		}
+
+		
+
+		
+
+		
+		
+		// d.show();
 	},
 
 

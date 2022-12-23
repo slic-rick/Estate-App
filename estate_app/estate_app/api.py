@@ -14,3 +14,8 @@ def contact_agent(**args):
     # doc,recipients,msg,title,attachments=None
     sendmail(prop,[agentEmail],msg,"An email from the website")
     return "Message sent successfully"
+@frappe.whitelist()
+def get_amenities(property):
+    data = frappe.db.sql(f"""SELECT * FROM `tabProperty Amenity Detail` WHERE parent = {property};
+     """,as_dict = True)
+    return data
