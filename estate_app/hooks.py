@@ -12,7 +12,7 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/estate_app/css/estate_app.css"
-# app_include_js = "/assets/estate_app/js/estate_app.js"
+# app_include_js = "/assets/estate_app/js/button.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/estate_app/css/estate_app.css"
