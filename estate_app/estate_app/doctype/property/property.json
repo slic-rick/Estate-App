@@ -10,11 +10,16 @@
  "field_order": [
   "property_name",
   "property_type",
+  "column_break_3",
   "address",
   "property_price",
-  "column_break_3",
+  "section_break_5",
+  "map",
+  "section_break_52",
+  "column_break_8",
   "image",
   "agent_name",
+  "column_break_12",
   "status",
   "agent",
   "discount",
@@ -51,10 +56,6 @@
    "in_list_view": 1,
    "label": "Description",
    "reqd": 1
-  },
-  {
-   "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "property_type",
@@ -119,11 +120,37 @@
    "fieldtype": "Currency",
    "label": "Total Price",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "map",
+   "fieldtype": "Geolocation",
+   "label": "Map",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_52",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-14 22:28:54.991648",
+ "modified": "2022-12-23 10:45:21.714853",
  "modified_by": "Administrator",
  "module": "Estate App",
  "name": "Property",

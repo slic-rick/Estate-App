@@ -2,43 +2,43 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Property', {
-	refresh: function(frm) {
+	// refresh: function(frm) {
 
-		frm.add_custom_button("Get Prop Type",() => {
-			var type = frm.doc.property_type;
-			frappe.call({
-				method: 'estate_app.estate_app.doctype.property.api.get_property_type',
-				args:{property_type: type},
-				callback: (r) => {
-					console.log(r);
+	// 	frm.add_custom_button("Get Prop Type",() => {
+	// 		var type = frm.doc.property_type;
+	// 		frappe.call({
+	// 			method: 'estate_app.estate_app.doctype.property.api.get_property_type',
+	// 			args:{property_type: type},
+	// 			callback: (r) => {
+	// 				console.log(r);
 
-					if(r.message.length > 0){
+	// 				if(r.message.length > 0){
 
-						var header = "<h3> Properties from DB API </h3>";
-						var body = ``;
+	// 					var header = "<h3> Properties from DB API </h3>";
+	// 					var body = ``;
 
-						r.message.forEach( item => {
+	// 					r.message.forEach( item => {
 						
-                         var count = `<p> Name: ${item.property_type} <a href= "/${item.name}"> open link </a>`; 
-							body = body + count;
-						});
+    //                      var count = `<p> Name: ${item.property_type} <a href= "/${item.name}"> open link </a>`; 
+	// 						body = body + count;
+	// 					});
 
-						var all = header + body;
-						frappe.msgprint(__(all));
+	// 					var all = header + body;
+	// 					frappe.msgprint(__(all));
 						
 
-					}
-					// console.log(r);
-				}
-			})
+	// 				}
+	// 				// console.log(r);
+	// 			}
+	// 		})
 
 
-		},"Action")
-		frm.add_custom_button("Get One",() => {
+	// 	},"Action")
+	// 	frm.add_custom_button("Get One",() => {
 
-			frappe.msgprint("Get One");
-		},"Action")
-	},
+	// 		frappe.msgprint("Get One");
+	// 	},"Action")
+	// },
 
 	setup: (frm) => {
 
@@ -130,7 +130,33 @@ frappe.ui.form.on('Property', {
 		frm.copy_amenities(frm)
 		frm.calculate_total(frm);
 		
+	},
+
+
+	map: (frm) => {
+		console.log(frm);
+
+		let map_data = JSON.parse(cur_frm.doc.map).features[0]
+
+		// If the map_data is not empty we get the latitide and longitude
+
+		if(map_data && map_data.geometry.type=='Point'){
+			let long = map_data.geometry.coordinates[0]
+			let lat = map_data.geometry.coordinates[1]
+
+		frappe.call({
+			url:`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${long}`,
+			callback: (r) => {
+				frm.set_value('address',display_name)
+				// console.log(r.display_name);
+
+			}
+		})
+		}
+
 	}
+
+
 
 
 });
