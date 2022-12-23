@@ -1,5 +1,5 @@
 import frappe
-
+# from bitcoin_value import currency
 def sendmail(doc,recipients,msg,title,attachments=None):
     email_args = {
         'recipients':recipients,
@@ -49,3 +49,6 @@ def paginate(doctype,page=0,paginate_by=6, conditions = ""):
         "prev":prev,
         "search":search
     }
+
+def property_to_btc(price):
+    return float(price) * 2

@@ -50,7 +50,7 @@ doctype_js = {
 website_route_rules = [
     {"from_route":"/property/detail/<docname>",
     "to_route":"property/detail"
-    }
+    },
 ]
 
 # Generators
@@ -63,10 +63,10 @@ website_route_rules = [
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-#	"methods": "estate_app.utils.jinja_methods",
-#	"filters": "estate_app.utils.jinja_filters"
-# }
+jinja = {
+	"methods": ["estate_app.utils.property_to_btc"],
+	# "filters": "estate_app.utils.jinja_filters"
+}
 
 # Installation
 # ------------
