@@ -28,7 +28,8 @@
   "section_break6",
   "amenities",
   "pricing_section",
-  "total_price"
+  "total_price",
+  "amended_from"
  ],
  "fields": [
   {
@@ -146,11 +147,21 @@
   {
    "fieldname": "column_break_12",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Property",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2022-12-23 10:45:21.714853",
+ "modified": "2022-12-24 10:28:48.084030",
  "modified_by": "Administrator",
  "module": "Estate App",
  "name": "Property",
